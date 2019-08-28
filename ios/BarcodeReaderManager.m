@@ -17,7 +17,7 @@
 @synthesize callback;
 RCT_EXPORT_MODULE(BarcodeReaderManager)
 
-//单参数 单回调时使用
+//单参数 单回调时使用1
 //RCT_EXPORT_METHOD(readBarcode:(NSString *)key callback:(RCTResponseSenderBlock)callback){
 //    self.callback = callback;
 //    //主要这里必须使用主线程发送,不然有可能失效
