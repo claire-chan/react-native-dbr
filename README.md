@@ -1,4 +1,17 @@
-# Barcode Detection Module for React Native
+# Barcode Scanning Module for React Native
+
+This is a sample that shows how to implement barcode scanning in React Native using Dynamsoft Barcode Reader SDK. 
+
+To learn more about Dynamsoft Barcode Reader, please visit http://www.dynamsoft.com/Products/Dynamic-Barcode-Reader.aspx.
+
+
+## License
+
+You can request for a free trial license online. [Get a trial license >](https://www.dynamsoft.com/CustomerPortal/Portal/Triallicense.aspx)
+
+Without a valid license, the SDK can work but will not return a full result.
+
+<kbd><img src="http://www.codepool.biz/wp-content/uploads/2017/04/react-native-barcode-license.png" width="50%">
 
 ## How to Run the Example
 
@@ -9,17 +22,22 @@ react-native run-android or react-native run-ios
 ```
 
 ### Screenshots
-![Barcode Detection for React Native](http://www.codepool.biz/wp-content/uploads/2017/04/react-native-barcode-detection.jpg)
-![Barcode Detection for React Native](http://www.codepool.biz/wp-content/uploads/2017/04/react-native-barcode-result.png)
 
-## How to Use the Module
-## In Android
-1. Create a new React Native project:
+<kbd><img src="http://www.codepool.biz/wp-content/uploads/2017/04/react-native-barcode-detection.jpg" width="50%">
+
+<kbd><img src="http://www.codepool.biz/wp-content/uploads/2017/04/react-native-barcode-result.png" width="50%">
+
+## How to Use the Barcode Scanning Module
+
+### In Android
+
+1. Create a new React Native project.
 
     ```bash
     react-native init NewProject
     ```
-2. Add the local module to dependencies in **package.json**: 
+
+2. Add the local module to dependencies in `package.json`.
 
     ```json
     "dependencies": {
@@ -28,12 +46,14 @@ react-native run-android or react-native run-ios
 		"react-native-dbr":"file:../"
 	},
     ```
-3. Link dependencies:
+
+3. Link dependencies.
 
     ```bash
     react-native link
     ```
-4. Use **flatDir** to define library path in **android/build.gradle**:
+
+4. Use **flatDir** to define library path in `android/build.gradle`.
 
     ```
     flatDir {
@@ -41,7 +61,7 @@ react-native run-android or react-native run-ios
     }
     ```
 
-4. Use the module in **index.android.js**:
+4. Use the module in `index.android.js`.
 
     ```javascript
     import BarcodeReaderManager from 'react-native-dbr';
@@ -53,13 +73,16 @@ react-native run-android or react-native run-ios
         console.log(err);
     });
     ```
-## In iOS
-1. Create a new React Native project:
+
+### In iOS
+
+1. Create a new React Native project.
 
     ```bash
     react-native init NewProject --version 0.44.3
     ```
-2. Add the local module to dependencies in **NewProject/package.json**: 
+
+2. Add the local module to dependencies in `NewProject/package.json`.
 
     ```json
     "dependencies": {
@@ -68,17 +91,19 @@ react-native run-android or react-native run-ios
         "react-native-dbr":"file:../"
     }
     ```
-3. Remove node_moudules and install:
+
+3. Remove `node_moudules` and install.
 
     ```bash
     sudo rm -rf node_moudules 
     npm install or yarn
     ```
-4. Add  BarcodeReaderManager.xcodeproj to  your project libraries :
 
-5. Use the module in **index.ios.js**:
+4. Add `BarcodeReaderManager.xcodeproj` to  your project libraries.
 
-    ```Add the following code：
+5. Use the module in `index.ios.js`.
+
+    ```javascript
     import BarcodeReaderManager from 'react-native-dbr';
     BarcodeReaderManager.readBarcode('your license here').then((msg) =>{
         this.setState({result: msg});
@@ -86,9 +111,10 @@ react-native run-android or react-native run-ios
         console.log(err);
     });
     ```
-6. In AppDelegate.m (In order to achieve navigation from react-native to viewController):
 
-    ```Add the following code：
+6. To achieve navigation from react-native to viewController, in `AppDelegate.m`, add the following code:
+
+    ```objective-c
     #import "../../../ios/BarcodeReaderManagerViewController.h"
     #import "../../../ios/DbrManager.h"
 
@@ -114,9 +140,7 @@ react-native run-android or react-native run-ios
         [self.nav popToViewController:self.rootViewController animated:YES];
     }
     ```
-    
-If you do not have a valid license, please contact <support@dynamsoft.com>. With invalid license, the SDK can work but will not return a full result.
-![Invalid license](http://www.codepool.biz/wp-content/uploads/2017/04/react-native-barcode-license.png)
 
 ## Blog
+
 [Android Barcode Detection Component for React Native](http://www.codepool.biz/android-barcode-detection-component-react-native.html)
