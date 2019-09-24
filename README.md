@@ -112,9 +112,17 @@ react-native run-android or react-native run-ios
     });
     ```
 
-6. To achieve navigation from react-native to viewController, in `AppDelegate.m`, add the following code:
+6. To achieve navigation from react-native to viewController, in `AppDelegate.h` and `AppDelegate.m`, add the following code:
 
-    ```objective-c
+    ```AppDelegate.h:
+    ...
+    @property (nonatomic, strong) UIWindow *window;
+    @property (nonatomic, strong) UINavigationController *nav;
+    @property (nonatomic, strong) RCTRootView *rootView;
+    @property (nonatomic, strong) UIViewController *rootViewController;
+    ...
+    
+    ```AppDelegate.m:
     #import "../../../ios/BarcodeReaderManagerViewController.h"
     #import "../../../ios/DbrManager.h"
 
