@@ -12,8 +12,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreMedia/CoreMedia.h>
 #import <AVFoundation/AVFoundation.h>
-#import <DynamsoftBarcodeReader/DynamsoftBarcodeSDK.h>
-
+#import <DynamsoftbarcodereaderSDk/DynamsoftBarcodeSDK.h>
+//#import <D>
 @interface DbrManager : NSObject<AVCaptureVideoDataOutputSampleBufferDelegate, NSURLConnectionDelegate>
 
 @property (nonatomic) long barcodeFormat;

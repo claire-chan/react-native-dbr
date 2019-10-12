@@ -11,7 +11,7 @@
 #import "DbrManager.h"
 #import <React/RCTBridgeModule.h>
 
-@import DynamsoftBarcodeReader;
+@import DynamsoftbarcodereaderSDk;
 @implementation BarcodeReaderManagerViewController
 {
     BOOL m_isFlashOn;

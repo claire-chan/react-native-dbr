@@ -1,0 +1,8 @@
+platform :ios, '9.0'
+
+target 'BarcodeReaderManager' do
+  use_frameworks!
+
+  pod 'DynamsoftbarcodereaderSDk', :git => 'https://github.com/zyunique/DynamsoftbarcodereaderSDK.git', :branch => '7.2.0'
+
+end

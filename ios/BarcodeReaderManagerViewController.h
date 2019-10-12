@@ -13,7 +13,7 @@
 #import "DbrManager.h"
 #import "BarcodeReaderManager.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-#import <DynamsoftBarcodeReader/DynamsoftBarcodeSDK.h>
+#import <DynamsoftbarcodereaderSDk/DynamsoftBarcodeSDK.h>
 NS_ASSUME_NONNULL_BEGIN
 @interface BarcodeReaderManagerViewController : UIViewController{
     UIView *cameraPreview;

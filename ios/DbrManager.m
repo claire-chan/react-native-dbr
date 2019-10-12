@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DbrManager.h"
-@import DynamsoftBarcodeReader;
+@import DynamsoftbarcodereaderSDk;
 @implementation DbrManager
 {
     AVCaptureSession *m_videoCaptureSession;
