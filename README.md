@@ -16,7 +16,7 @@ Without a valid license, the SDK can work but will not return a full result.
 ## How to Run the Example
 
 ```bash
-cd Example
+cd ios
 npm install
 react-native run-android or react-native run-ios
 ```
@@ -61,7 +61,7 @@ react-native run-android or react-native run-ios
     }
     ```
 
-4. Use the module in `index.android.js`.
+4. Use the module in `App.js`.
 
     ```javascript
     import BarcodeReaderManager from 'react-native-dbr';
@@ -79,7 +79,7 @@ react-native run-android or react-native run-ios
 1. Create a new React Native project.
 
     ```bash
-    react-native init NewProject --version 0.44.3
+    react-native init NewProject
     ```
 
 2. Add the local module to dependencies in `NewProject/package.json`.
@@ -101,7 +101,7 @@ react-native run-android or react-native run-ios
 
 4. Add `BarcodeReaderManager.xcodeproj` to  your project libraries.
 
-5. Use the module in `index.ios.js`.
+5. Use the module in `App.js`.
 
     ```javascript
     import BarcodeReaderManager from 'react-native-dbr';
