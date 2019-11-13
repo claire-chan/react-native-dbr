@@ -1,1 +1,1 @@
-ios/DynamsoftBarcodeReader.framework/DynamsoftBarcodeReader filter=lfs diff=lfs merge=lfs -text
+Libraries/DynamsoftBarcodeReader.framework/DynamsoftBarcodeReader filter=lfs diff=lfs merge=lfs -text
