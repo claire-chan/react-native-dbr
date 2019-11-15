@@ -16,8 +16,7 @@ Without a valid license, the SDK can work but will not return a full result.
 ## How to Run the Example
 
 ```bash
-cd ios
-npm install
+npm install or yarn
 react-native run-android or react-native run-ios
 ```
 
@@ -41,9 +40,9 @@ react-native run-android or react-native run-ios
 
     ```json
     "dependencies": {
-		"react": "16.0.0-alpha.6",
-		"react-native": "0.43.3",
-		"react-native-dbr":"file:../"
+        "react": "16.9.0",
+        "react-native": "^0.61.1",
+        "react-native-dbr": "file:androidLib"
 	},
     ```
 
@@ -57,14 +56,15 @@ react-native run-android or react-native run-ios
 
     ```
     flatDir {
-        dirs "$rootDir/../node_modules/react-native-dbr/android/lib"
+        dirs "$rootDir/../node_modules/androidLib/android/lib"
     }
     ```
 
 4. Use the module in `App.js`.
 
     ```javascript
-    import BarcodeReaderManager from 'react-native-dbr';
+    import {NativeModules} from 'react-native';
+    const BarcodeReaderManager = NativeModules.BarcodeReaderManager;
 
     BarcodeReaderManager.readBarcode('your license key', (msg) => {
         this.setState({result: msg});
@@ -86,9 +86,9 @@ react-native run-android or react-native run-ios
 
     ```json
     "dependencies": {
-        "react": "16.0.0-alpha.6",
-        "react-native": "0.43.3",
-        "react-native-dbr":"file:../"
+        "react": "16.9.0",
+        "react-native": "^0.61.1",
+        "react-native-dbr": "file:androidLib"
     }
     ```
 
@@ -104,7 +104,9 @@ react-native run-android or react-native run-ios
 5. Use the module in `App.js`.
 
     ```javascript
-    import BarcodeReaderManager from 'react-native-dbr';
+    import {NativeModules} from 'react-native';
+    const BarcodeReaderManager = NativeModules.BarcodeReaderManager;
+    
     BarcodeReaderManager.readBarcode('your license here').then((msg) =>{
         this.setState({result: msg});
     }).catch((err) => {
