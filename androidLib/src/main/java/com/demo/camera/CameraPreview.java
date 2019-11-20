@@ -1,4 +1,4 @@
-package com.dynamsoft.camera;
+package com.demo.camera;
 
 import android.content.Context;
 import android.hardware.Camera;

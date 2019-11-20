@@ -1,4 +1,4 @@
-package com.dynamsoft.camera;
+package com.demo.camera;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -16,7 +16,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 
 import com.dynamsoft.barcode.TextResult;
-import com.dynamsoft.barcodescanner.R;
+import com.demo.barcodescanner.R;
 
 public class CustomDialog extends Dialog {
 

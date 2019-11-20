@@ -1,4 +1,4 @@
-package com.dynamsoft.camera;
+package com.demo.camera;
 
 
 import android.Manifest;
@@ -34,7 +34,7 @@ import com.dynamsoft.barcode.BarcodeReader;
 import com.dynamsoft.barcode.BarcodeReaderException;
 import com.dynamsoft.barcode.EnumImagePixelFormat;
 import com.dynamsoft.barcode.TextResult;
-import com.dynamsoft.barcodescanner.R;
+import com.demo.barcodescanner.R;
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
