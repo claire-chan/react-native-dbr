@@ -32,12 +32,18 @@ const App : () => React$Node = () => {
     result: 'N/A' 
   };
   onButtonPress = () => {
-    BarcodeReaderManager.readBarcode('your license here').then((events) =>{
-      // this.setState({result: events});
-      alert(events)
-      }).catch((err) => {
-        console.log(err);
-      });
+    // BarcodeReaderManager.readBarcode('your license here').then((events) =>{
+    //   // this.setState({result: events});
+    //   alert(events)
+    //   }).catch((err) => {
+    //     console.log(err);
+    //   });
+    BarcodeReaderManager.readBarcode('your license here',events => {
+        alert(events)
+      },err => {
+        alert(err)
+      }
+    );
   }
 
   return (
