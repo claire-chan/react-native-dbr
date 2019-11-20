@@ -1,3 +1,5 @@
 rootProject.name = 'Demo'
+include(':react-native-dbr')
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+project(':react-native-dbr').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-dbr/androidLib')
 include ':app'
