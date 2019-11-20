@@ -56,7 +56,7 @@ react-native run-android or react-native run-ios
 
     ```
     flatDir {
-        dirs "$rootDir/../node_modules/androidLib/androidLib/lib"
+        dirs project(':react-native-dbr').file('lib')
     }
     ```
 
@@ -66,12 +66,12 @@ react-native run-android or react-native run-ios
     import {NativeModules} from 'react-native';
     const BarcodeReaderManager = NativeModules.BarcodeReaderManager;
 
-    BarcodeReaderManager.readBarcode('your license key', (msg) => {
-        this.setState({result: msg});
-        }, 
-        (err) => {
-        console.log(err);
-    });
+    BarcodeReaderManager.readBarcode('your license here',events => {
+        alert(events)
+      },err => {
+        alert(err)
+      }
+    );
     ```
 
 ### In iOS
