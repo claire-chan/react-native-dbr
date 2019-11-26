@@ -88,7 +88,7 @@ react-native run-android or react-native run-ios
     "dependencies": {
         "react": "16.9.0",
         "react-native": "^0.61.1",
-        "react-native-dbr": "file:androidLib"
+        "react-native-dbr": "file:../react-native-dbr"
     }
     ```
 
