@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -27,34 +27,40 @@ import {
 import {NativeModules} from 'react-native';
 const BarcodeReaderManager = NativeModules.BarcodeReaderManager;
 
-const App : () => React$Node = () => {
-  state = {
-    result: 'N/A' 
-  };
-  onButtonPress = () => {
-    // BarcodeReaderManager.readBarcode('your license here').then((events) =>{
-    //   // this.setState({result: events});
-    //   alert(events)
-    //   }).catch((err) => {
-    //     console.log(err);
-    //   });
-    BarcodeReaderManager.readBarcode('your license here',events => {
-        alert(events)
-      },err => {
-        alert(err)
-      }
-    );
-  }
+export default class App extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            result: 'N/A'
+        };
+    }
 
-  return (
-    <View style={styles.container}>
-        <Button title='Read Barcode' onPress={this.onButtonPress.bind(this)} />
-        <Text style={styles.display}>
-          Barcode Result : {this.state.result}
-        </Text>
-    </View>
-  );
-};
+  	onButtonPress = () => {
+  		//ios
+    	BarcodeReaderManager.readBarcode('your license here').then((events) =>{
+			this.setState({result: events});
+		}).catch((err) => {
+			console.log(err);
+		});
+	    //android
+	    // BarcodeReaderManager.readBarcode('your license here',events => {
+	    //     this.setState({result: events});
+	    //   },err => {
+	    //     alert(err)
+	    //   }
+	    // );
+  	}
+	render(){
+		return (
+			<View style={styles.container}>
+			<Button title='Read Barcode' onPress={this.onButtonPress} />
+			<Text style={styles.display}>
+				Barcode Result : {this.state.result}
+			</Text>
+			</View>
+		);
+	};
+}
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -106,5 +112,3 @@ const styles = StyleSheet.create({
     margin: 10,
   },
 });
-
-export default App;
