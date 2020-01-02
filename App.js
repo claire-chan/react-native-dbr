@@ -38,16 +38,17 @@ export default class App extends Component{
   	onButtonPress = () => {
   		//ios
     	BarcodeReaderManager.readBarcode('your license here').then((events) =>{
-			this.setState({result: events});
-		}).catch((err) => {
-			console.log(err);
-		});
+			  this.setState({result: events});
+		  }).catch((err) => {
+			  console.log(err);
+		  });
+
 	    //android
 	    // BarcodeReaderManager.readBarcode('your license here',events => {
-	    //     this.setState({result: events});
-	    //   },err => {
-	    //     alert(err)
-	    //   }
+  	  //     this.setState({result: events});
+  	  //   },err => {
+  	  //     alert(err);
+  	  //   }
 	    // );
   	}
 	render(){
