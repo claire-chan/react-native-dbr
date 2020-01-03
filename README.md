@@ -15,7 +15,8 @@ Without a valid license, the SDK can work but will not return a full result.
 
 ## Dependencies
 ```bash
-Node, Python2, JDK, Watchman, Xcode and Android Studio. The version of Node must be greater than or equal to 10 and less than or equal to 12.11, the version of Python must be 2.x (does not support 3.x), and the version of JDK must be 1.8.
+Node, Python2, JDK, Watchman, Xcode and Android Studio. 
+(Windows: The version of Node must be greater than or equal to 10 and less than or equal to 12.11, the version of Python must be 2.x (does not support 3.x), and the version of JDK must be 1.8)
 ```
 
 ## How to Run the Example
@@ -70,7 +71,8 @@ react-native run-android or react-native run-ios
     ```javascript
     import {NativeModules} from 'react-native';
     const BarcodeReaderManager = NativeModules.BarcodeReaderManager;
-
+    
+    //android
     BarcodeReaderManager.readBarcode('your license here',events => {
         alert(events)
       },err => {
@@ -112,6 +114,7 @@ react-native run-android or react-native run-ios
     import {NativeModules} from 'react-native';
     const BarcodeReaderManager = NativeModules.BarcodeReaderManager;
     
+    //ios
     BarcodeReaderManager.readBarcode('your license here').then((msg) =>{
         this.setState({result: msg});
     }).catch((err) => {
