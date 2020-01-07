@@ -54,7 +54,7 @@
     [self configInterface];
 }
 
-- (void)viewDidUnload {
+-(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     if(dbrManager != nil)
     {
@@ -180,20 +180,17 @@
 }
 
 -(void) onReadImageBufferComplete:(NSArray *) readResult{
-    
     if(readResult == nil || dbrManager.isPauseFramesComing == YES)
     {
         dbrManager.isCurrentFrameDecodeFinished = YES;
         return;
     }
-    
     double timeInterval = [dbrManager.startRecognitionDate timeIntervalSinceNow] * -1;
     iTextResult* barcode = (iTextResult*)readResult.firstObject;
     if (!barcode) {
         dbrManager.isCurrentFrameDecodeFinished = YES;
         return;
     }
-    
     double left = FLT_MAX;
     double top = FLT_MAX;
     double right = 0;
@@ -204,8 +201,12 @@
         right = right > [barcode.localizationResult.resultPoints[i] CGPointValue].x ? right : [barcode.localizationResult.resultPoints[i] CGPointValue].x;
         bottom = bottom > [barcode.localizationResult.resultPoints[i] CGPointValue].y ? bottom : [barcode.localizationResult.resultPoints[i] CGPointValue].y;
     }
-    NSString* msgText = [NSString stringWithFormat:@"\nType: %@\n\nValue: %@\n\nRegion: {Left: %.f, Top: %.f, Right: %.f, Bottom: %.f}\n\nInterval: %.03f seconds\n\n",
-                         barcode.barcodeFormatString, barcode.barcodeText, left, top, right, bottom, timeInterval];
+    NSString* msgText = @"";
+    if (barcode.barcodeFormat_2 != 0) {
+        msgText = [NSString stringWithFormat:@"\nType: %@\n\nValue: %@\n\nRegion: {Left: %.f, Top: %.f, Right: %.f, Bottom: %.f}\n\nInterval: %.03f seconds\n\n", barcode.barcodeFormatString_2, barcode.barcodeText, left, top, right, bottom, timeInterval];
+    }else{
+        msgText = [NSString stringWithFormat:@"\nType: %@\n\nValue: %@\n\nRegion: {Left: %.f, Top: %.f, Right: %.f, Bottom: %.f}\n\nInterval: %.03f seconds\n\n", barcode.barcodeFormatString, barcode.barcodeText, left, top, right, bottom, timeInterval];
+    }
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter]postNotificationName:@"callback" object:nil userInfo:@{@"result": msgText}];
