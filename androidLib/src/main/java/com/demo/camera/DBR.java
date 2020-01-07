@@ -36,7 +36,9 @@ import androidx.core.content.ContextCompat;
 
 import com.dynamsoft.barcode.BarcodeReader;
 import com.dynamsoft.barcode.BarcodeReaderException;
+import com.dynamsoft.barcode.EnumBarcodeFormat_2;
 import com.dynamsoft.barcode.EnumImagePixelFormat;
+import com.dynamsoft.barcode.PublicRuntimeSettings;
 import com.dynamsoft.barcode.TextResult;
 import com.demo.barcodescanner.R;
 
@@ -274,7 +276,11 @@ public class DBR extends Activity implements Camera.PreviewCallback {
                         if (mIsIntent) {
                             Intent data = new Intent();
                             data.putExtra("SCAN_RESULT", barcode.barcodeText);
-                            data.putExtra("SCAN_RESULT_FORMAT", barcode.barcodeFormatString);
+                            if (barcode.barcodeFormat_2 != 0){
+                                data.putExtra("SCAN_RESULT_FORMAT", barcode.barcodeFormatString_2);
+                            }else{
+                                data.putExtra("SCAN_RESULT_FORMAT", barcode.barcodeFormatString);
+                            }
                             DBR.this.setResult(DBR.RESULT_OK, data);
                             DBR.this.finish();
                             mFinished = true;
@@ -346,6 +352,15 @@ public class DBR extends Activity implements Camera.PreviewCallback {
             int height = yuvImage.getHeight();
             int[] strides = yuvImage.getStrides();
 
+            try {
+                PublicRuntimeSettings settings = mBarcodeReader.getRuntimeSettings();
+                settings.barcodeFormatIds_2 = EnumBarcodeFormat_2.BF2_POSTALCODE | EnumBarcodeFormat_2.BF2_NONSTANDARD_BARCODE;
+                mBarcodeReader.updateRuntimeSettings(settings);
+            } catch (BarcodeReaderException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             try {
                 TextResult[] readResult = mBarcodeReader.decodeBuffer(yuvImage.getYuvData(), width, height, strides[0], EnumImagePixelFormat.IPF_NV21, "");
                 Message message = handler.obtainMessage(READ_RESULT, readResult);
