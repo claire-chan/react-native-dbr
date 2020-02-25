@@ -74,10 +74,10 @@ react-native run-android or react-native run-ios
     
     //android
     BarcodeReaderManager.readBarcode('your license here',events => {
-        alert(events)
-      },err => {
-        alert(err)
-      }
+      this.setState({result: events});
+    },err => {
+      alert(err);
+    }
     );
     ```
 
