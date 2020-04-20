@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.dynamsoft.camera.DBR">
+    tools:context="com.demo.camera.DBR">
 
     <LinearLayout
         android:orientation="horizontal" android:layout_width="match_parent"
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
-        <com.dynamsoft.camera.RectLayer
+        <com.demo.camera.RectLayer
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/rectLayer"/>
