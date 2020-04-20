@@ -49,7 +49,7 @@
     {
         m_barcodeReader = [[DynamsoftBarcodeReader alloc] initWithLicense:license];
         iPublicRuntimeSettings* settings = [m_barcodeReader getRuntimeSettings:nil];
-        settings.barcodeFormatIds_2 = EnumBarcodeFormat2POSTALCODE | EnumBarcodeFormat2NONSTANDARDBARCODE;
+        settings.barcodeFormatIds_2 = EnumBarcodeFormat2POSTALCODE | EnumBarcodeFormat2NONSTANDARDBARCODE | EnumBarcodeFormat2DOTCODE;
         [m_barcodeReader updateRuntimeSettings:settings error:nil];
         [self MemberInitialize];
     }
