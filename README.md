@@ -48,8 +48,8 @@ react-native run-android or react-native run-ios
     "dependencies": {
         "react": "16.9.0",
         "react-native": "^0.61.1",
-        "react-native-dbr": "file:../react-native-dbr"
-	},
+        "react-native-dbr": "file:../NewProject"
+    },
     ```
 
 3. Link dependencies.
@@ -95,7 +95,7 @@ react-native run-android or react-native run-ios
     "dependencies": {
         "react": "16.9.0",
         "react-native": "^0.61.1",
-        "react-native-dbr": "file:../react-native-dbr"
+        "react-native-dbr": "file:../NewProject"
     }
     ```
 
