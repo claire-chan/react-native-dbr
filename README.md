@@ -21,9 +21,19 @@ Node, Python2, JDK, Watchman, Xcode and Android Studio.
 
 ## How to Run the Example
 
+### iOS
+Run `pod install` from the Example directory first, then `npm install or yarn (npm install -g yarn)`.
+And make sure `Pods/Target Support Files/Pods-BarcodeReaderManager.debug.xcconfig`:
+```bash
+FRAMEWORK_SEARCH_PATHS = "${PODS_ROOT}/DynamsoftBarcodeReader"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/DynamsoftBarcodeReader/DynamsoftBarcodeReader.framework/Headers"
+```
+Then `react-native run-ios`.
+
+### Android
 ```bash
 npm install or yarn (npm install -g yarn)
-react-native run-android or react-native run-ios
+react-native run-android
 ```
 
 ### Screenshots
@@ -106,9 +116,21 @@ react-native run-android or react-native run-ios
     npm install or yarn
     ```
 
-4. Add `BarcodeReaderManager.xcodeproj` to  your project libraries.
+4. Add `BarcodeReaderManager.xcodeproj` to  your project libraries. And make sure `Pods/Target Support Files/Pods-BarcodeReaderManager.debug.xcconfig`:
 
-5. Modify the module in `App.js`(different from android).
+```
+  FRAMEWORK_SEARCH_PATHS = "${PODS_ROOT}/DynamsoftBarcodeReader"
+  HEADER_SEARCH_PATHS = "${PODS_ROOT}/DynamsoftBarcodeReader/DynamsoftBarcodeReader.framework/Headers"
+```
+
+5.  In your NewProject: 
+
+```
+  Project -> Build Settings -> FRAMEWORK_SEARCH_PATHS = `$(PROJECT_DIR)/../Libraries` 
+  HEADER_SEARCH_PATHS = `$(PROJECT_DIR)/../Libraries`
+```
+
+6. Modify the module in `App.js`(different from android).
 
     ```javascript
     import {NativeModules} from 'react-native';
@@ -122,7 +144,7 @@ react-native run-android or react-native run-ios
     });
     ```
 
-6. To achieve navigation from react-native to viewController, in `AppDelegate.h` and `AppDelegate.m`, add the following code:
+7. To achieve navigation from react-native to viewController, in `AppDelegate.h` and `AppDelegate.m`, add the following code:
 
     ```AppDelegate.h:
     ...
