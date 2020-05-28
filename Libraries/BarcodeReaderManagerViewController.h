@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) UIButton *  flashButton;
 @property (nonatomic, strong, nullable) UILabel *detectDescLabel;
 @property (nonatomic, strong, nullable) UIButton *helpButton;
+@property (nonatomic, strong, nullable) NSMutableArray *textResult;
 @end
 NS_ASSUME_NONNULL_END
 #endif /* ViewControl_h */
