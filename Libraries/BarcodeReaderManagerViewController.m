@@ -3,12 +3,12 @@
 //  BarcodeReaderManager
 //
 //  Created by dynamsoft on 2019/8/23.
-//  Copyright © 2019年 Facebook. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "BarcodeReaderManagerViewController.h"
 #import "DbrManager.h"
+#import "ResultTableView.h"
 #import <React/RCTBridgeModule.h>
 
 @import DynamsoftBarcodeReader;
@@ -16,6 +16,9 @@
 {
     BOOL m_isFlashOn;
     int itrFocusFinish;
+    UITextView* resultTV;
+    UIButton* resultBtn;
+    ResultTableView* resultView;
 }
 @synthesize cameraPreview;
 @synthesize previewLayer;
@@ -23,9 +26,25 @@
 @synthesize dbrManager;
 @synthesize flashButton;
 @synthesize helpButton;
+@synthesize textResult;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    textResult = [[NSMutableArray alloc]init];
+    resultBtn = [[UIButton alloc] initWithFrame:CGRectMake(110, 50, 160, 50)];
+    [resultBtn setTitle:@"Show Results" forState:UIControlStateNormal];
+    [resultBtn addTarget:self action:@selector(onResultButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:resultBtn];
+    resultTV = [[UITextView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - 150, self.view.bounds.size.width, 120)];
+    resultTV.layer.borderWidth = 1;
+    resultTV.layer.borderColor = UIColor.whiteColor.CGColor;
+    resultTV.layer.backgroundColor = UIColor.clearColor.CGColor;
+    [resultTV setEditable:NO];
+    resultTV.font = [UIFont systemFontOfSize:14];
+    resultTV.textColor = UIColor.whiteColor;
+    resultTV.textAlignment = NSTextAlignmentCenter;
+    resultTV.layer.cornerRadius = 3;
+    [self.view addSubview:resultTV];
     flashButton = [[UIButton alloc] initWithFrame:CGRectMake(110, 80, 150, 150)];
     [flashButton setImage:[UIImage imageNamed:@"flash_off"] forState:UIControlStateNormal];
     [flashButton addTarget:self action:@selector(onFlashButtonClick) forControlEvents:UIControlEventTouchUpInside];
@@ -33,8 +52,8 @@
     rectLayerImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 20, 300, 300)];
     rectLayerImage.center = self.view.center;
     [self.view addSubview:rectLayerImage];
-    helpButton = [[UIButton alloc] initWithFrame:CGRectMake(110, 50, 150, 150)];
-    [helpButton setImage:[UIImage imageNamed:@"help"] forState:UIControlStateNormal];
+    helpButton = [[UIButton alloc] initWithFrame:CGRectMake(110, 150, 100, 50)];
+    [helpButton setTitle:@"About us" forState:UIControlStateNormal];
     [helpButton addTarget:self action:@selector(onAboutInfoClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:helpButton];
     
@@ -125,6 +144,20 @@
     [self turnFlashOn:m_isFlashOn];
 }
 
+- (void)onResultButtonClick {
+    resultView = [[ResultTableView alloc] init];
+    resultView.mainView = self;
+    UIBarButtonItem *backButton =
+    [[UIBarButtonItem alloc] initWithTitle:@"Back"
+                                     style:UIBarButtonItemStylePlain
+                                    target:nil
+                                    action:nil];
+    
+    [[self navigationItem] setBackBarButtonItem:backButton];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self presentViewController:resultView animated:YES completion:nil];
+}
+
 - (void) customizeAC : (UIAlertController *) ac
 {
     if(ac == nil) return;
@@ -149,7 +182,7 @@
     
     UIAlertController * ac=   [UIAlertController
                                alertControllerWithTitle:@"About"
-                               message:@"\nDynamsoft Barcode Reader Mobile App Demo(Dynamsoft Barcode Reader SDK)\n\n© 2019 Dynamsoft. All rights reserved. \n\nIntegrate Barcode Reader Functionality into Your own Mobile App? \n\nClick 'Overview' button for further info.\n\n"
+                               message:@"\nDynamsoft Barcode Reader Mobile App Demo(Dynamsoft Barcode Reader SDK)\n\n© 2020 Dynamsoft. All rights reserved. \n\nIntegrate Barcode Reader Functionality into Your own Mobile App? \n\nClick 'Overview' button for further info.\n\n"
                                preferredStyle:UIAlertControllerStyleAlert];
     
     [self customizeAC:ac];
@@ -207,10 +240,27 @@
     }else{
         msgText = [NSString stringWithFormat:@"\nType: %@\n\nValue: %@\n\nRegion: {Left: %.f, Top: %.f, Right: %.f, Bottom: %.f}\n\nInterval: %.03f seconds\n\n", barcode.barcodeFormatString, barcode.barcodeText, left, top, right, bottom, timeInterval];
     }
-    
+    NSString* countText = [NSString stringWithFormat:@" Count = %lu\n\n", (unsigned long)readResult.count];
+    self->resultTV.text = [countText stringByAppendingString:msgText];
+    self->dbrManager.isCurrentFrameDecodeFinished = YES;
+    for (NSInteger i=0; i<[readResult count]; i++) {
+        [textResult addObject:((iTextResult*)readResult[i]).barcodeText];
+    }
+    textResult = [self removeRepeatWithContainObjFunc:textResult];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"callback" object:nil userInfo:@{@"result": msgText}];
+//        [[NSNotificationCenter defaultCenter]postNotificationName:@"callback" object:nil userInfo:@{@"result": msgText}];
     });
+}
+
+- (NSMutableArray *)removeRepeatWithContainObjFunc:(NSArray *)array {
+    NSMutableArray *listArray = [NSMutableArray array];
+    
+    for (NSString  *str in array) {
+        if (![listArray containsObject:str]) {
+            [listArray addObject:str];
+        }
+    }
+    return listArray;
 }
 
 // callback
@@ -325,13 +375,13 @@
     //6. align helpButton horizontal center
     CGRect tempFrame = helpButton.frame;
     tempFrame.origin.x = (width - helpButton.bounds.size.width) / 2;
-    tempFrame.origin.y = heightMargin * 0.3;
+    tempFrame.origin.y = heightMargin * 0.5;
     [helpButton setFrame:tempFrame];
     
     //7. align flashButton horizontal center
     tempFrame = flashButton.frame;
     tempFrame.origin.x = (width - flashButton.bounds.size.width) / 2;
-    tempFrame.origin.y = (heightMargin + (width - widthMargin * 2) + height) * 0.5 - flashButton.bounds.size.height * 0.5;
+    tempFrame.origin.y = self.view.bounds.size.height - 100;
     [flashButton setFrame:tempFrame];
     return;
 }
