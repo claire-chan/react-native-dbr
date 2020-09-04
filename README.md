@@ -23,12 +23,10 @@ Node, Python2, JDK, Watchman, Xcode and Android Studio.
 
 ### iOS
 Run `npm install or yarn (npm install -g yarn)` from the Example directory first, then `pod install` in the react-native-dbr/Libraries.
-And make sure `Pods/Target Support Files/Pods-BarcodeReaderManager.debug.xcconfig`:
+And make sure `Your Project Target -> Build Settings -> Search Paths -> Frameworks Search Paths` and `Linking`:
 ```bash
-FRAMEWORK_SEARCH_PATHS = "${PODS_ROOT}/DynamsoftBarcodeReader"
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/DynamsoftBarcodeReader/DynamsoftBarcodeReader.framework/Headers"
-LIBRARY_SEARCH_PATHS = "${PODS_ROOT}/DynamsoftBarcodeReader"
-OTHER_LDFLAGS = -framework "DynamsoftBarcodeReader"
+Frameworks Search Paths = "${PODS_ROOT}/DynamsoftBarcodeReader"
+Other Linker Flags = -framework "DynamsoftBarcodeReader"
 ```
 Then `react-native run-ios`.
 
