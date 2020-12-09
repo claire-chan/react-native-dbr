@@ -1,11 +1,21 @@
 # OSX
 #
 .DS_Store
-
+Pods/
+Libraries/Pods/
+xcuserdata/
+xcshareddata/
 # Android
 # Built application files
 *.apk
 *.ap_
+*.iml
+.gradle
+/local.properties
+.idea/
+build/
+/captures
+.externalNativeBuild
 
 # Files for the Dalvik VM
 *.dex
