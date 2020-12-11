@@ -18,8 +18,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.StrictMode;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
@@ -32,12 +32,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dynamsoft.barcode.BarcodeReader;
-import com.dynamsoft.barcode.BarcodeReaderException;
-import com.dynamsoft.barcode.EnumBarcodeFormat_2;
-import com.dynamsoft.barcode.EnumImagePixelFormat;
-import com.dynamsoft.barcode.PublicRuntimeSettings;
-import com.dynamsoft.barcode.TextResult;
+import com.dynamsoft.dbr.BarcodeReader;
+import com.dynamsoft.dbr.BarcodeReaderException;
+import com.dynamsoft.dbr.EnumBarcodeFormat_2;
+import com.dynamsoft.dbr.EnumImagePixelFormat;
+import com.dynamsoft.dbr.PublicRuntimeSettings;
+import com.dynamsoft.dbr.TextResult;
 import com.demo.barcodescanner.R;
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -82,13 +82,13 @@ public class DBR extends Activity implements Camera.PreviewCallback {
             mBarcodeReader = new BarcodeReader(licenseKey);
             //
 //            mBarcodeReader.initLicenseFromServer("https://www.dynamsoft.com/api/DbrLicense/Authorize",licenseKey,
-//		new DBRServerLicenseVerificationListener() {
+//      new DBRServerLicenseVerificationListener() {
 //                @Override
 //                public void licenseVerificationCallback(boolean isSuccess, Exception error) {
 //                    if (!isSuccess) {
-//			Log.i(TAG, "DBR license verify failed due to " + error.getMessage());
-//			}
-//		}
+//          Log.i(TAG, "DBR license verify failed due to " + error.getMessage());
+//          }
+//      }
 //            });
         } catch (Exception e) {
             e.printStackTrace();
@@ -215,8 +215,8 @@ public class DBR extends Activity implements Camera.PreviewCallback {
                     mCamera.setDisplayOrientation(90);
                     Camera.Parameters cameraParameters = mCamera.getParameters();
                     if (cameraParameters.getSupportedFocusModes().contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO)) {
-			cameraParameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
-		    }
+            cameraParameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+            }
                     mCamera.setParameters(cameraParameters);
                 }
 
@@ -273,7 +273,7 @@ public class DBR extends Activity implements Camera.PreviewCallback {
                     if (barcode != null) {
                         if (mIsIntent) {
                             Intent data = new Intent();
-                            data.putExtra("SCAN_RESULT", barcode.barcodeText);
+                            data.putExtra("SCAN_RESULT", barcode.barcodeText.replaceAll("[\\u0000-\\u001f\b]",""));
                             if (barcode.barcodeFormat_2 != 0){
                                 data.putExtra("SCAN_RESULT_FORMAT", barcode.barcodeFormatString_2);
                             }else{
@@ -298,11 +298,11 @@ public class DBR extends Activity implements Camera.PreviewCallback {
                         int y = Integer.MIN_VALUE;
                         //rotate cornerPoints by 90, NewLeft = H - Ymax, NewTop = Left, NewWidth = Height, NewHeight = Width
 
-                        com.dynamsoft.barcode.Point[] points = barcode.localizationResult.resultPoints;
+                        com.dynamsoft.dbr.Point[] points = barcode.localizationResult.resultPoints;
                         int leftX,leftY,rightX,rightY;
                         rightX=leftX = points[0].x;
                         rightY=leftY = points[0].y;
-                        for (com.dynamsoft.barcode.Point pt:points ) {
+                        for (com.dynamsoft.dbr.Point pt:points ) {
                             if(pt.x<leftX) leftX=pt.x;
                             if(pt.y<leftY) leftY=pt.y;
                             if(pt.x>rightX) rightX = pt.x;
@@ -467,11 +467,11 @@ public class DBR extends Activity implements Camera.PreviewCallback {
             case Surface.ROTATION_270: mDisplayOffset = 270; break;
             default: mDisplayOffset = 0; break;
         }
-        //		if (mFacing == Facing.FRONT) {
-//			// Here we had ((mSensorOffset - mDisplayOffset) + 360 + 180) % 360
-//			// And it seemed to give the same results for various combinations, but not for all (e.g. 0 - 270).
-//			return (360 - ((mSensorOffset + mDisplayOffset) % 360)) % 360;
-//		} else
+        //      if (mFacing == Facing.FRONT) {
+//          // Here we had ((mSensorOffset - mDisplayOffset) + 360 + 180) % 360
+//          // And it seemed to give the same results for various combinations, but not for all (e.g. 0 - 270).
+//          return (360 - ((mSensorOffset + mDisplayOffset) % 360)) % 360;
+//      } else
         {
             int nOrientationDisplayOffset =  (nSensorOrientation - mDisplayOffset + 360) % 360;
             return nOrientationDisplayOffset;
