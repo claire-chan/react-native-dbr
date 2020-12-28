@@ -45,7 +45,7 @@ react-native run-android
 
 ### In Android
 
-1. Create a new React Native project.
+1. Create a new React Native project if you donnot have one.
 
     ```bash
     react-native init NewProject
@@ -57,25 +57,41 @@ react-native run-android
     "dependencies": {
         "react": "16.9.0",
         "react-native": "^0.61.1",
-        "react-native-dbr": "file:../NewProject"
+        "react-native-dbr": "^8.0.0"
     },
     ```
 
-3. Link dependencies.
-
-    ```bash
-    react-native link
-    ```
-
-4. Use **flatDir** to define library path in `android/build.gradle`.
+3. On `android/settings.gradle`.
 
     ```
-    flatDir {
-        dirs project(':react-native-dbr').file('lib')
+    include ':react-native-dbr'
+    project(':react-native-dbr').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-dbr/androidLib')
+   ```
+
+4. Add `':react-native-dbr'` dependency in `android/app/build.gradle`.
+
+    ```
+    dependencies {
+        implementation project(path: ':react-native-dbr')
     }
     ```
+5. On the MainApplication of your Android project add the import of BarcodeReaderPackage line to:
 
-4. Use the module in `App.js`.
+    ```java
+    import com.demo.barcodescanner.BarcodeReaderPackage;
+    
+    ...
+    @Override
+    protected List<ReactPackage> getPackages() {
+      @SuppressWarnings("UnnecessaryLocalVariable")
+      List<ReactPackage> packages = new PackageList(this).getPackages();
+      packages.add(new BarcodeReaderPackage()); // add BarcodeReaderPackage here!!
+      return packages;
+    }
+    ...
+    
+    ```
+6. Use the module in `App.js`.
 
     ```javascript
     import {NativeModules} from 'react-native';
@@ -104,7 +120,7 @@ react-native run-android
     "dependencies": {
         "react": "16.9.0",
         "react-native": "^0.61.1",
-        "react-native-dbr": "file:../NewProject"
+        "react-native-dbr": "^8.0.0"
     }
     ```
 
