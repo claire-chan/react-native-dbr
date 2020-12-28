@@ -57,7 +57,7 @@ react-native run-android
     "dependencies": {
         "react": "16.9.0",
         "react-native": "^0.61.1",
-        "react-native-dbr": "^8.0.0"
+        "react-native-dbr": "^8.0.1"
     },
     ```
 
@@ -120,7 +120,7 @@ react-native run-android
     "dependencies": {
         "react": "16.9.0",
         "react-native": "^0.61.1",
-        "react-native-dbr": "^8.0.0"
+        "react-native-dbr": "^8.0.1"
     }
     ```
 
