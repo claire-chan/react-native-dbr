@@ -152,6 +152,13 @@
     }
 }
 
+- (void)stopVideoSession{
+    if([m_videoCaptureSession isRunning])
+    {
+        [m_videoCaptureSession stopRunning];
+    }
+}
+
 -(AVCaptureSession*) getVideoSession {
     return m_videoCaptureSession;
 }

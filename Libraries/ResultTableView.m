@@ -105,7 +105,12 @@
 {
     if(mainView.textResult != nil)
     {
-        [self goShare:mainView.textResult];
+        NSString* res = @"";
+        for (int i=0; i<mainView.textResult.count; i++) {
+            res = [res stringByAppendingFormat:@"%d : %@\n", i+1, mainView.textResult[i]];
+        }
+        NSArray* temp = [[NSArray alloc] initWithObjects:res,nil];
+        [self goShare:temp];
     }else{
         UIAlertController* ac = [UIAlertController alertControllerWithTitle:@"Sorry" message:@"No Result!" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleDefault handler:nil];

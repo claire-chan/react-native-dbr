@@ -96,6 +96,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [dbrManager startVideoSession];
     AVCaptureDevice *camDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     int flags = NSKeyValueObservingOptionNew;
     [camDevice addObserver:self forKeyPath:@"adjustingFocus" options:flags context:nil];
@@ -104,6 +105,8 @@
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
+    dbrManager.isPauseFramesComing = YES;
+    [dbrManager stopVideoSession];
     AVCaptureDevice*camDevice =[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     [camDevice removeObserver:self forKeyPath:@"adjustingFocus"];
     
@@ -147,14 +150,6 @@
 - (void)onResultButtonClick {
     resultView = [[ResultTableView alloc] init];
     resultView.mainView = self;
-    UIBarButtonItem *backButton =
-    [[UIBarButtonItem alloc] initWithTitle:@"Back"
-                                     style:UIBarButtonItemStylePlain
-                                    target:nil
-                                    action:nil];
-    
-    [[self navigationItem] setBackBarButtonItem:backButton];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self presentViewController:resultView animated:YES completion:nil];
 }
 
@@ -244,11 +239,13 @@
     self->resultTV.text = [countText stringByAppendingString:msgText];
     self->dbrManager.isCurrentFrameDecodeFinished = YES;
     for (NSInteger i=0; i<[readResult count]; i++) {
-        [textResult addObject:((iTextResult*)readResult[i]).barcodeText];
+        if (((iTextResult*)readResult[i]).barcodeText) {
+            [textResult addObject:((iTextResult*)readResult[i]).barcodeText];
+        }
     }
     textResult = [self removeRepeatWithContainObjFunc:textResult];
     dispatch_async(dispatch_get_main_queue(), ^{
-//        [[NSNotificationCenter defaultCenter]postNotificationName:@"callback" object:nil userInfo:@{@"result": msgText}];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"callback" object:nil userInfo:@{@"result": msgText}];
     });
 }
 

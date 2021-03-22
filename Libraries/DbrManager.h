@@ -32,6 +32,8 @@
 
 -(void)startVideoSession;
 
+-(void)stopVideoSession;
+
 -(AVCaptureSession*) getVideoSession;
 
 -(void)setRecognitionCallback :(id)sender :(SEL)callback;
