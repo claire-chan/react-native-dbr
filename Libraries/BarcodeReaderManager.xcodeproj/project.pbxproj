@@ -10,7 +10,7 @@
 		6883C4E3230FD89C009335C1 /* DbrManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6883C4E2230FD89C009335C1 /* DbrManager.m */; };
 		6883C4E8230FD908009335C1 /* BarcodeReaderManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6883C4E7230FD908009335C1 /* BarcodeReaderManagerViewController.m */; };
 		C4279048234C7B3F005B0C33 /* BarcodeReaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4279047234C7B3E005B0C33 /* BarcodeReaderManager.m */; };
-		C44D1256237BB0300030436E /* DynamsoftBarcodeReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C44D1255237BB0300030436E /* DynamsoftBarcodeReader.framework */; };
+		C463E5BD247D1B140058CBCE /* ResultTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C463E5BC247D1B140058CBCE /* ResultTableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,8 +35,8 @@
 		91D03DA7612AC0C0671E4963 /* Pods-BarcodeReaderManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BarcodeReaderManager.debug.xcconfig"; path = "Target Support Files/Pods-BarcodeReaderManager/Pods-BarcodeReaderManager.debug.xcconfig"; sourceTree = "<group>"; };
 		C4279046234C7B3E005B0C33 /* BarcodeReaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarcodeReaderManager.h; sourceTree = "<group>"; };
 		C4279047234C7B3E005B0C33 /* BarcodeReaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarcodeReaderManager.m; sourceTree = "<group>"; };
-		C44D1255237BB0300030436E /* DynamsoftBarcodeReader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DynamsoftBarcodeReader.framework; sourceTree = "<group>"; };
-		CB1CF1B5D6965D076C19DDB1 /* libPods-BarcodeReaderManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BarcodeReaderManager.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C463E5BC247D1B140058CBCE /* ResultTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultTableView.m; sourceTree = "<group>"; };
+		C463E5BE247D1B2D0058CBCE /* ResultTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultTableView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +44,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C44D1256237BB0300030436E /* DynamsoftBarcodeReader.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,13 +61,14 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				C463E5BE247D1B2D0058CBCE /* ResultTableView.h */,
+				C463E5BC247D1B140058CBCE /* ResultTableView.m */,
 				C4279046234C7B3E005B0C33 /* BarcodeReaderManager.h */,
 				C4279047234C7B3E005B0C33 /* BarcodeReaderManager.m */,
 				6883C4E7230FD908009335C1 /* BarcodeReaderManagerViewController.m */,
 				6883C4E6230FD8F8009335C1 /* BarcodeReaderManagerViewController.h */,
 				6883C4E2230FD89C009335C1 /* DbrManager.m */,
 				6883C4E1230FD870009335C1 /* DbrManager.h */,
-				C44D1255237BB0300030436E /* DynamsoftBarcodeReader.framework */,
 				134814211AA4EA7D00B7C361 /* Products */,
 				6883C54C230FDC8D009335C1 /* Frameworks */,
 				B327A5329D7916664663E2AC /* Pods */,
@@ -78,7 +78,6 @@
 		6883C54C230FDC8D009335C1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CB1CF1B5D6965D076C19DDB1 /* libPods-BarcodeReaderManager.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -177,6 +176,7 @@
 			files = (
 				C4279048234C7B3F005B0C33 /* BarcodeReaderManager.m in Sources */,
 				6883C4E8230FD908009335C1 /* BarcodeReaderManagerViewController.m in Sources */,
+				C463E5BD247D1B140058CBCE /* ResultTableView.m in Sources */,
 				6883C4E3230FD89C009335C1 /* DbrManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,10 +295,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 91D03DA7612AC0C0671E4963 /* Pods-BarcodeReaderManager.debug.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				EXCLUDED_ARCHS = x86_64;
+				FRAMEWORK_SEARCH_PATHS = "${PROJECT_DIR}/Pods/**";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../react-native/React/**",
 					"$(SRCROOT)/../../../React/**",
@@ -316,10 +314,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 695A03A8C12976C6A29B7982 /* Pods-BarcodeReaderManager.release.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
+				EXCLUDED_ARCHS = x86_64;
+				FRAMEWORK_SEARCH_PATHS = "${PROJECT_DIR}/Pods/**";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../react-native/React/**",
 					"$(SRCROOT)/../../../React/**",
