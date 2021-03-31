@@ -1,22 +1,31 @@
 # Barcode Scanning Module for React Native
 
-This is a sample that shows how to implement barcode scanning in React Native using Dynamsoft Barcode Reader SDK. 
+A barcode scanner component for React Native built on top of [Dynamsoft Mobile Barcode SDK](https://www.dynamsoft.com/barcode-reader/sdk-mobile/). 
 
-To learn more about Dynamsoft Barcode Reader, please visit http://www.dynamsoft.com/Products/Dynamic-Barcode-Reader.aspx.
+## Try Barcode Scanner Demo App
+
+[<kbd><img src="https://www.dynamsoft.com/webres/wwwroot/images/icons/Google-play.svg" width="50%">](https://play.google.com/store/apps/details?id=com.dynamsoft.demo.dynamsoftbarcodereaderdemo)
+    
+![Barcode Scanner X](https://www.dynamsoft.com/webres/wwwroot/images/icons/google-play-qrcode.png)
+
+[<kbd><img src="https://www.dynamsoft.com/webres/wwwroot/images/icons/apple-store.svg" width="50%">](https://itunes.apple.com/us/app/barcode-scanner-x/id1120581630?mt=8)
+    
+![Barcode Scanner X](https://www.dynamsoft.com/webres/wwwroot/images/icons/app-store-qrcode.png)
+
+## License Key
+
+You can get a [30-day FREE Trial License](https://www.dynamsoft.com/customer/license/trialLicense) online. Without a valid license, the SDK can work but only return obfuscated results.
+
+## Contact Us
+If there are any questions, please feel free to contact support@dynamsoft.com.
 
 
-## License
+## Development Requirements
 
-You can request for a free trial license online. [Get a trial license >](https://www.dynamsoft.com/CustomerPortal/Portal/Triallicense.aspx)
-
-Without a valid license, the SDK can work but will not return a full result.
-
-<kbd><img src="http://www.codepool.biz/wp-content/uploads/2017/04/react-native-barcode-license.png" width="50%">
-
-## Dependencies
-```bash
-Node, Python2, JDK, Watchman, Xcode and Android Studio. 
-(Windows: The version of Node must be greater than or equal to 10 and less than or equal to 12.11, the version of Python must be 2.x (does not support 3.x), and the version of JDK must be 1.8)
+- Node
+- JDK
+- Xcode 
+- Android Studio. 
 ```
 
 ## How to Run the Example
@@ -200,6 +209,3 @@ react-native run-android
     }
     ```
 
-## Blog
-
-[Android Barcode Detection Component for React Native](http://www.codepool.biz/android-barcode-detection-component-react-native.html)
