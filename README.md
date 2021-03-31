@@ -26,7 +26,6 @@ If there are any questions, please feel free to contact support@dynamsoft.com.
 - JDK
 - Xcode 
 - Android Studio. 
-```
 
 ## How to Run the Example
 
